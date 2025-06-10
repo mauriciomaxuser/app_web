@@ -1,0 +1,294 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="app_web.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>CENTRO DE IDIOMAS - <%: Page.Title %></title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link rel="icon" href="<%= ResolveUrl("~/plantilla/kaiadmin/assets/img/kaiadmin/favicon.ico") %>" type="image/x-icon" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css" />
+
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.dataTables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> <script src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.html5.min.js"></script> <script src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.print.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" integrity="sha512-yDVMONIXJPPAoULZ92Ygngsn8ZUGB4ejm6fCc6q9ZvdH8blFAOgg75XZSEaAJ5m4E/yPI1BAi5fF2axMHVuZ5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js" integrity="sha512-0wQvB58Ha5coWmcgtg4f11CTSSxfrfLClUp9Vy0qhzYzCZDSnoB4Vhu5JXJFs7rU24LE6JsH+6hpP7vQ22lk5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/webfont/webfont.min.js") %>"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <style>
+        .dt-buttons {
+            float: right;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .form-control.error {
+            border: 1px solid red;
+        }
+    </style>
+
+    <link rel="stylesheet" href="<%= ResolveUrl("~/plantilla/kaiadmin/assets/css/bootstrap.min.css") %>" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/plantilla/kaiadmin/assets/css/plugins.min.css") %>" />
+    <link rel="stylesheet" href="<%= ResolveUrl("~/plantilla/kaiadmin/assets/css/kaiadmin.min.css") %>" />
+
+    <link rel="stylesheet" href="<%= ResolveUrl("~/plantilla/kaiadmin/assets/css/demo.css") %>" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%-- Your existing ASP.NET Script References --%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="wrapper">
+            <div class="sidebar" data-background-color="dark">
+                <div class="sidebar-logo">
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="<%= ResolveUrl("~/") %>" class="logo">
+                            <img src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/img/kaiadmin/logo_light.svg") %>" alt="navbar brand" class="navbar-brand" height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar" type="button"> <%-- ADDED type="button" HERE --%>
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler" type="button"> <%-- ADDED type="button" HERE --%>
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more" type="button"> <%-- ADDED type="button" HERE --%>
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    </div>
+                <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                    <div class="sidebar-content">
+                        <ul class="nav nav-secondary">
+                            <li class="nav-section">
+                                <span class="sidebar-mini-icon">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </span>
+                                <h4 class="text-section">Navegación Principal</h4>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<%= ResolveUrl("~/Default.aspx") %>">
+                                    <p>Desarrolladores</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<%= ResolveUrl("~/Contact.aspx") %>">
+                                    <p>Proyectos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<%= ResolveUrl("~/About.aspx") %>">
+                                    <p>Acerca de</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-panel">
+                <div class="main-header">
+                    <div class="main-header-logo">
+                        <div class="logo-header" data-background-color="dark">
+                            <a href="<%= ResolveUrl("~/") %>" class="logo">
+                                <img src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/img/kaiadmin/logo_light.svg") %>" alt="navbar brand" class="navbar-brand" height="20" />
+                            </a>
+                            <div class="nav-toggle">
+                                <button class="btn btn-toggle toggle-sidebar" type="button"> <%-- ADDED type="button" HERE --%>
+                                    <i class="gg-menu-right"></i>
+                                </button>
+                                <button class="btn btn-toggle sidenav-toggler" type="button"> <%-- ADDED type="button" HERE --%>
+                                    <i class="gg-menu-left"></i>
+                                </button>
+                            </div>
+                            <button class="topbar-toggler more" type="button"> <%-- ADDED type="button" HERE --%>
+                                <i class="gg-more-vertical-alt"></i>
+                            </button>
+                        </div>
+                        </div>
+                    <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                        <div class="container-fluid">
+                            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                                <li class="nav-item topbar-user dropdown hidden-caret">
+                                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                                        <div class="avatar-sm">
+                                            <img src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/img/profile.jpg") %>" alt="..." class="avatar-img rounded-circle" />
+                                        </div>
+                                        <span class="profile-username">
+                                            <span class="op-7">Buenos dias,</span>
+                                            <span class="fw-bold">Diego</span>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                        <div class="dropdown-user-scroll scrollbar-outer">
+                                            <li>
+                                                <div class="user-box">
+                                                    <div class="avatar-lg">
+                                                        <img src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/img/profile.jpg") %>" alt="image profile" class="avatar-img rounded" />
+                                                    </div>
+                                                    <div class="u-text">
+                                                        <h4>Rodriguez Diego</h4>
+                                                        <p class="text-muted">diego.rodriguez8517@utc.edu.ec</p>
+                                                        <a href="#" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Perfil</a>
+                                                <a class="dropdown-item" href="#">Inbox</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Ajustes</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Salir</a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    </div>
+
+                <div class="container">
+                    <div class="page-inner">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+                        <br /><br /><br /><br /><br />
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <div class="container-fluid d-flex justify-content-between">
+                        <nav class="pull-left">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://www.utc.edu.ec/">UTC</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Help</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Licenses</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright">
+                            2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                            <a href="http://www.themekita.com">ThemeKita</a>
+                        </div>
+                        <div>
+                            Distributed by
+                            <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/core/jquery-3.7.1.min.js") %>"></script>
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/core/popper.min.js") %>"></script>
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/core/bootstrap.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/chart.js/chart.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/chart-circle/circles.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/datatables/datatables.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/jsvectormap/jsvectormap.min.js") %>"></script>
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/jsvectormap/world.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/plugin/sweetalert/sweetalert.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/kaiadmin.min.js") %>"></script>
+
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/setting-demo.js") %>"></script>
+        <script src="<%= ResolveUrl("~/plantilla/kaiadmin/assets/js/demo.js") %>"></script>
+        <script>
+            $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+                type: "line",
+                height: "70",
+                width: "100%",
+                lineWidth: "2",
+                lineColor: "#177dff",
+                fillColor: "rgba(23, 125, 255, 0.14)",
+            });
+
+            $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+                type: "line",
+                height: "70",
+                width: "100%",
+                lineWidth: "2",
+                lineColor: "#f3545d",
+                fillColor: "rgba(243, 84, 93, .14)",
+            });
+
+            $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+                type: "line",
+                height: "70",
+                width: "100%",
+                lineWidth: "2",
+                lineColor: "#ffa534",
+                fillColor: "rgba(255, 165, 52, .14)",
+            });
+        </script>
+        <asp:PlaceHolder runat="server">
+            <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+        </asp:PlaceHolder>
+    </form>
+</body>
+</html>
